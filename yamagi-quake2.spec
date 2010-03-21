@@ -2,7 +2,7 @@
 %define name		yamagi-%{oname}
 %define version		1.05
 %define icculus_version 1.05
-%define release		%mkrel 10
+%define release		%mkrel 1
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define	Summary		Quake II
