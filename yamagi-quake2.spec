@@ -27,12 +27,6 @@ Source13:	%{oname}_48.png
 Group:		Games/Arcade
 License:	GPL
 BuildRoot:	%{_tmppath}/%{oname}-%{version}-%{release}-buildroot
-Patch0:		quake2-chris.patch
-Patch1:		quake2-fix_build.patch
-Patch2:		quake2-allow_softx_on_x86_64.patch
-Patch3:		quake2-build_softsdl_on_x86_64.patch
-# fix undefined mremap (create errors on x86_64)
-Patch4:		quake2-fix_mremap.patch
 BuildRequires:  SDL-devel aalib-devel svgalib-devel X11-devel
 
 %description
@@ -206,11 +200,6 @@ This archive contains the Quake II dedicated server.
 %setup -q -T -b 0 -n %{oname}-%{version}
 %setup -q -T -D -a 1 -n %{oname}-%{version}
 %setup -q -T -D -a 2 -n %{oname}-%{version}
-# %patch0 -p1 -b .chris
-# %patch1 -p1 -b .fix_build
-# %patch2 -p0 -b .allow_softx_on_x86_64
-# %patch3 -p0 -b .build_softsdl_on_x86_64
-# %patch4 -p1
 
 %build
 %ifarch %{ix86} x86_64
