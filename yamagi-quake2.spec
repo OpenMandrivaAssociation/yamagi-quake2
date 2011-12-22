@@ -5,10 +5,11 @@
 %define release		%mkrel 1
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
+%define	ctf_source	%{oname}-ctf
 %define	Summary		Quake II
 %define rogue_version	1.04
 %define xatrix_version	1.06
-
+%define	ctf_version	1.00
 Summary:	%{Summary}
 Name:		%{name}
 Version:	%{version}
@@ -17,6 +18,7 @@ URL:		http://icculus.org/projects/quake2/
 Source0:	%{oname}-%{version}.tar.xz
 Source1:	%{rogue_source}-%{rogue_version}.tar.bz2
 Source2:	%{xatrix_source}-%{xatrix_version}.tar.bz2
+Source3:	%{ctf_source}-%{ctf_version}.tar.xz
 Source6:	q2ded.sh
 Source7:	q2ded.cfg
 Source8:	q2ctf.sh
@@ -200,6 +202,7 @@ This archive contains the Quake II dedicated server.
 %setup -q -T -b 0 -n %{oname}-%{version}
 %setup -q -T -D -a 1 -n %{oname}-%{version}
 %setup -q -T -D -a 2 -n %{oname}-%{version}
+%setup -q -T -D -a 3 -n %{oname}-%{version}
 
 %build
 %ifarch %{ix86} x86_64
