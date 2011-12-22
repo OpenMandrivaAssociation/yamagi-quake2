@@ -1,20 +1,20 @@
 %define oname		quake2
 %define name		yamagi-%{oname}
-%define version		3.00
-%define icculus_version 3.00
-%define release		%mkrel 1.1
+%define version		4.00
+%define icculus_version 4.00
+%define release		%mkrel 1
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define	Summary		Quake II
-%define rogue_version	1.03
-%define xatrix_version	1.04
+%define rogue_version	1.04
+%define xatrix_version	1.06
 
 Summary:	%{Summary}
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 URL:		http://icculus.org/projects/quake2/
-Source0:	%{oname}-%{version}.tar.bz2
+Source0:	%{oname}-%{version}.tar.xz
 Source1:	%{rogue_source}-%{rogue_version}.tar.bz2
 Source2:	%{xatrix_source}-%{xatrix_version}.tar.bz2
 Source6:	q2ded.sh
