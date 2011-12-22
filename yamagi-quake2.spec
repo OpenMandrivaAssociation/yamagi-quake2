@@ -228,7 +228,7 @@ cp $rel/ref_*.so %{buildroot}%{_libdir}/games/quake2/
 cp $rel/quake2 %{buildroot}%{_gamesbindir}/quake2.bin
 cp $rel/q2ded %{buildroot}%{_gamesbindir}/q2ded.bin
 cp $rel/baseq2/game.so %{buildroot}%{_libdir}/games/quake2/baseq2/
-cp $rel/ctf/game.so %{buildroot}%{_libdir}/games/quake2/ctf/
+# cp $rel/ctf/game.so %{buildroot}%{_libdir}/games/quake2/ctf/
 # cp $rel/rogue/game%{_arch}.so %{buildroot}%{_libdir}/games/quake2/rogue/
 # cp $rel/xatrix/game%{_arch}.so %{buildroot}%{_libdir}/games/quake2/xatrix/
 
