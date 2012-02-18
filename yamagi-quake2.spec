@@ -29,7 +29,7 @@ Source13:	%{oname}_48.png
 Group:		Games/Arcade
 License:	GPL
 BuildRoot:	%{_tmppath}/%{oname}-%{version}-%{release}-buildroot
-BuildRequires:  SDL-devel aalib-devel svgalib-devel X11-devel libvorbis-devel
+BuildRequires:  SDL-devel aalib-devel svgalib-devel libvorbis-devel libxrender-devel
 
 %description
 Shortly after landing on an alien surface you learn that hundreds of your men
