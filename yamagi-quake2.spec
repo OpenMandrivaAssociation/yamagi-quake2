@@ -30,6 +30,7 @@ BuildRequires:	svgalib-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libxrender-devel
 BuildRequires:	zlib-devel
+BuildRequires:	jpeg-devel
 Suggests:	%{name}-glx = %{version}-%{release}
 
 %description
