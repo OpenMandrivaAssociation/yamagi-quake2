@@ -1,20 +1,18 @@
 %define oname		quake2
-%define name		yamagi-%{oname}
-%define version		4.03
-%define icculus_version 4.03
-%define release		%mkrel 1
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
-%define	ctf_source	%{oname}-ctf
-%define	Summary		Quake II
+%define ctf_source	%{oname}-ctf
 %define rogue_version	1.05
 %define xatrix_version	1.07
-%define	ctf_version	1.00
-Summary:	%{Summary}
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-URL:		http://icculus.org/projects/quake2/
+%define ctf_version	1.00
+
+Name:		yamagi-%{oname}
+Version:	4.10
+Release:	%mkrel 1
+Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
+Group:		Games/Arcade
+License:	GPL
+URL:		http://www.yamagi.org/quake2/
 Source0:	%{oname}-%{version}.tar.xz
 Source1:	%{rogue_source}-%{rogue_version}.tar.xz
 Source2:	%{xatrix_source}-%{xatrix_version}.tar.xz
@@ -26,10 +24,13 @@ Source9:	q2ctf.cfg
 Source11:	%{oname}_16.png
 Source12:	%{oname}_32.png
 Source13:	%{oname}_48.png
-Group:		Games/Arcade
-License:	GPL
-BuildRoot:	%{_tmppath}/%{oname}-%{version}-%{release}-buildroot
-BuildRequires:  SDL-devel aalib-devel svgalib-devel libvorbis-devel libxrender-devel zlib-devel
+BuildRequires:	SDL-devel
+BuildRequires:	aalib-devel
+BuildRequires:	svgalib-devel
+BuildRequires:	libvorbis-devel
+BuildRequires:	libxrender-devel
+BuildRequires:	zlib-devel
+Suggests:	%{name}-glx = %{version}-%{release}
 
 %description
 Shortly after landing on an alien surface you learn that hundreds of your men
@@ -211,44 +212,41 @@ export OPTFLAGS="-O2 -ffast-math -funroll-loops -falign-loops=2 -falign-jumps=2 
 export OPTFLAGS="%{optflags} -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations"
 %endif
 
-%make	
+%make
 
 %install
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 
 # Install dirs
-install -d %{buildroot}%{_sysconfdir}/quake2/{baseq2,ctf,rogue,xatrix}
-install -d %{buildroot}%{_gamesbindir}
-install -d %{buildroot}%{_gamesdatadir}/quake2/{baseq2,ctf,rogue,xatrix}
-install -d %{buildroot}%{_libdir}/games/quake2/{baseq2,ctf,rogue,xatrix}
+%__install -d %{buildroot}%{_sysconfdir}/quake2/{baseq2,ctf,rogue,xatrix}
+%__install -d %{buildroot}%{_gamesbindir}
+%__install -d %{buildroot}%{_gamesdatadir}/quake2/{baseq2,ctf,rogue,xatrix}
+%__install -d %{buildroot}%{_libdir}/games/quake2/{baseq2,ctf,rogue,xatrix}
 
 # Install files
 rel="release"
-cp $rel/ref_*.so %{buildroot}%{_libdir}/games/quake2/
-cp $rel/quake2 %{buildroot}%{_gamesbindir}/quake2.bin
-cp $rel/q2ded %{buildroot}%{_gamesbindir}/q2ded.bin
-cp $rel/baseq2/game.so %{buildroot}%{_libdir}/games/quake2/baseq2/
-# cp $rel/ctf/game.so %{buildroot}%{_libdir}/games/quake2/ctf/
-# cp $rel/rogue/game%{_arch}.so %{buildroot}%{_libdir}/games/quake2/rogue/
-# cp $rel/xatrix/game%{_arch}.so %{buildroot}%{_libdir}/games/quake2/xatrix/
+%__cp $rel/ref_*.so %{buildroot}%{_libdir}/games/quake2/
+%__cp $rel/quake2 %{buildroot}%{_gamesbindir}/quake2.bin
+%__cp $rel/q2ded %{buildroot}%{_gamesbindir}/q2ded.bin
+%__cp $rel/baseq2/game.so %{buildroot}%{_libdir}/games/quake2/baseq2/
 
-install -m644 %{SOURCE7} -D %{buildroot}%{_sysconfdir}/quake2/baseq2/server.cfg
-install -m644 %{SOURCE9} -D %{buildroot}%{_sysconfdir}/quake2/ctf/server.cfg
+%__install -m644 %{SOURCE7} -D %{buildroot}%{_sysconfdir}/quake2/baseq2/server.cfg
+%__install -m644 %{SOURCE9} -D %{buildroot}%{_sysconfdir}/quake2/ctf/server.cfg
 
-install -m755 %{SOURCE6} -D %{buildroot}%{_initrddir}/q2ded
-install -m755 %{SOURCE8} -D %{buildroot}%{_initrddir}/q2ctf
+%__install -m755 %{SOURCE6} -D %{buildroot}%{_initrddir}/q2ded
+%__install -m755 %{SOURCE8} -D %{buildroot}%{_initrddir}/q2ctf
 
 for FILE in q2ded q2ctf ; do
 
     # Edit path to q2ded in initscript
-    sed -i -e "s|daemon[ ].*\${NAME}|daemon %{_gamesbindir}/\${NAME}|" %{buildroot}%{_initrddir}/${FILE}
+    %__sed -i -e "s|daemon[ ].*\${NAME}|daemon %{_gamesbindir}/\${NAME}|" %{buildroot}%{_initrddir}/${FILE}
 
     # Edit path to %{_sysconfdir} in initscript
-    sed -i -e "s|^Q2_CONFIGDIR=.*|Q2_CONFIGDIR=\"%{_sysconfdir}/quake2\"|" %{buildroot}%{_initrddir}/${FILE}
+    %__sed -i -e "s|^Q2_CONFIGDIR=.*|Q2_CONFIGDIR=\"%{_sysconfdir}/quake2\"|" %{buildroot}%{_initrddir}/${FILE}
 done
 
 # Create wrapper scripts
-cat << EOF > %{buildroot}%{_gamesbindir}/quake2
+%__cat << EOF > %{buildroot}%{_gamesbindir}/quake2
 #!/bin/sh
 
 %{_gamesbindir}/quake2.bin +set basedir %{_libdir}/games/quake2 \$*
@@ -256,7 +254,7 @@ cat << EOF > %{buildroot}%{_gamesbindir}/quake2
 exit 0
 EOF
 
-cat << EOF > %{buildroot}%{_gamesbindir}/q2ded
+%__cat << EOF > %{buildroot}%{_gamesbindir}/q2ded
 #!/bin/sh
 
 %{_gamesbindir}/q2ded.bin +set basedir %{_libdir}/games/quake2 \$*
@@ -265,17 +263,17 @@ exit 0
 EOF
 
 # Icons
-install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{oname}.png
-install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{oname}.png
-install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{oname}.png
+%__install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{oname}.png
+%__install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{oname}.png
+%__install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{oname}.png
 
 # Menu
-%{__mkdir_p} %{buildroot}%{_datadir}/applications
+%__mkdir_p %{buildroot}%{_datadir}/applications
 
-cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}.desktop
+%__cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}.desktop
 [Desktop Entry]
 Name=Quake II
-Comment=%{Summary}
+Comment=First-person shooter
 Exec=%{_gamesbindir}/quake2
 Icon=%{oname}
 Terminal=false
@@ -284,11 +282,10 @@ StartupNotify=false
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
 EOF
 
-
-cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-xatrix.desktop
+%__cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-xatrix.desktop
 [Desktop Entry]
 Name=Quake II: The Reckoning
-Comment=%{Summary}
+Comment=First-person shooter
 Exec=%{_gamesbindir}/quake2 +set game xatrix
 Icon=%{oname}
 Terminal=false
@@ -297,11 +294,10 @@ StartupNotify=true
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
 EOF
 
-
-cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-rogue.desktop
+%__cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-rogue.desktop
 [Desktop Entry]
 Name=Quake II: Ground Zero
-Comment=%{Summary}
+Comment=First-person shooter
 Exec=%{_gamesbindir}/quake2 +set game rogue
 Icon=%{oname}
 Terminal=false
@@ -310,11 +306,10 @@ StartupNotify=true
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
 EOF
 
-
-cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-ctf.desktop
+%__cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{oname}-ctf.desktop
 [Desktop Entry]
 Name=Quake II: Capture The Flag
-Comment=%{Summary}
+Comment=First-person shooter
 Exec=%{_gamesbindir}/quake2 +set game ctf
 Icon=%{oname}
 Terminal=false
@@ -335,17 +330,7 @@ ln -sf %{_gamesdatadir}/quake2/rogue/pak0.pak %{buildroot}%{_libdir}/games/quake
 ln -sf %{_gamesdatadir}/quake2/xatrix/pak0.pak %{buildroot}%{_libdir}/games/quake2/xatrix/pak0.pak
 
 %clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%endif
+%__rm -rf %{buildroot}
 
 %post server
 %_post_service q2ded
@@ -354,38 +339,10 @@ rm -rf %{buildroot}
 %_preun_service q2ded
 
 %post ctf
-%if %mdkversion < 200900
-%{update_menus}
-%endif
 %_post_service q2ctf
 
 %preun ctf
 %_preun_service q2ctf
-
-%if %mdkversion < 200900
-%postun ctf
-%{clean_menus}
-%endif
-
-%if %mdkversion < 200900
-%post rogue
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun rogue
-%{clean_menus}
-%endif
-
-%if %mdkversion < 200900
-%post xatrix
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun xatrix
-%{clean_menus}
-%endif
 
 %files
 %defattr(-,root,root,755)
@@ -433,6 +390,5 @@ rm -rf %{buildroot}
 %{_libdir}/games/quake2/xatrix
 %{_gamesdatadir}/quake2/xatrix
 %{_datadir}/applications/mandriva-%{oname}-xatrix.desktop
-
 
 
