@@ -7,7 +7,7 @@
 %define ctf_version	1.00
 
 Name:		yamagi-%{oname}
-Version:	4.10
+Version:	4.20
 Release:	%mkrel 1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
