@@ -2,12 +2,12 @@
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define ctf_source	%{oname}-ctf
-%define rogue_version	1.05
-%define xatrix_version	1.07
-%define ctf_version	1.00
+%define rogue_version	1.06
+%define xatrix_version	1.08
+%define ctf_version	1.01
 
 Name:		yamagi-%{oname}
-Version:	4.21
+Version:	5.00
 Release:	%mkrel 0.1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
