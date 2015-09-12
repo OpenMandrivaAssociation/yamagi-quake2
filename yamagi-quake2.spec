@@ -8,7 +8,7 @@
 
 Name:		yamagi-%{oname}
 Version:	5.00
-Release:	0.2
+Release:	0.3
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
 License:	GPL
