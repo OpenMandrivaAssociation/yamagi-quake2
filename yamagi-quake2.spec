@@ -2,13 +2,13 @@
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define ctf_source	%{oname}-ctf
-%define rogue_version	1.06
-%define xatrix_version	1.08
-%define ctf_version	1.01
+%define rogue_version	2.02
+%define xatrix_version	2.03
+%define ctf_version	1.03
 
 Name:		yamagi-%{oname}
-Version:	5.00
-Release:	0.3
+Version:	5.32
+Release:	1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
 License:	GPL
@@ -24,15 +24,18 @@ Source9:	q2ctf.cfg
 Source11:	%{oname}_16.png
 Source12:	%{oname}_32.png
 Source13:	%{oname}_48.png
-BuildRequires:	SDL-devel
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	aalib-devel
 BuildRequires:	svgalib-devel
-BuildRequires:	libvorbis-devel
-BuildRequires:	libxrender-devel
+BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(xrender)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glu)
 BuildRequires:	zlib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(openal)
-Suggests:	%{name}-glx = %{version}-%{release}
+# Seems to be removed in new versions
+Obsoletes:	%{name}-glx < 5.23
 
 %description
 Shortly after landing on an alien surface you learn that hundreds of your men
@@ -227,7 +230,6 @@ export OPTFLAGS="%{optflags} -ffast-math -funroll-loops -fomit-frame-pointer -fe
 
 # Install files
 rel="release"
-%__cp $rel/ref_*.so %{buildroot}%{_libdir}/games/quake2/
 %__cp $rel/quake2 %{buildroot}%{_gamesbindir}/quake2.bin
 %__cp $rel/q2ded %{buildroot}%{_gamesbindir}/q2ded.bin
 %__cp $rel/baseq2/game.so %{buildroot}%{_libdir}/games/quake2/baseq2/
@@ -376,10 +378,6 @@ ln -sf %{_gamesdatadir}/quake2/xatrix/pak0.pak %{buildroot}%{_libdir}/games/quak
 %{_libdir}/games/quake2/ctf
 %{_gamesdatadir}/quake2/ctf
 %{_datadir}/applications/mandriva-%{oname}-ctf.desktop
-
-%files glx
-%defattr(-,root,root,755)
-%{_libdir}/games/quake2/ref_gl.so
 
 %files rogue
 %defattr(-,root,root,755)
