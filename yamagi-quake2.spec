@@ -2,12 +2,12 @@
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define ctf_source	%{oname}-ctf
-%define rogue_version	2.02
-%define xatrix_version	2.03
-%define ctf_version	1.03
+%define rogue_version	2.04
+%define xatrix_version	2.05
+%define ctf_version	1.05
 
 Name:		yamagi-%{oname}
-Version:	5.32
+Version:	7.30
 Release:	1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
@@ -34,6 +34,8 @@ BuildRequires:	pkgconfig(glu)
 BuildRequires:	zlib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(openal)
+BuildRequires: pkgconfig(sdl2)
+BuildRequires: pkgconfig(x11)
 # Seems to be removed in new versions
 Obsoletes:	%{name}-glx < 5.23
 
@@ -74,8 +76,7 @@ Install the PAK files in %{_gamesdatadir}/quake2.
 Summary:	Quake II Capture the Flag for Linux
 Group:		Games/Arcade
 Requires:	%{name} = %{version} %{name}-server = %{version}
-Requires(preunt):	rpm-helper
-Requires(post):	rpm-helper
+Requires:	rpm-helper
 
 %description	ctf
 Quake II Capture The Flag (Q2CTF) is a multiplayer addon for Quake2 that 
@@ -350,7 +351,7 @@ ln -sf %{_gamesdatadir}/quake2/xatrix/pak0.pak %{buildroot}%{_libdir}/games/quak
 
 %files
 %defattr(-,root,root,755)
-%doc README
+%doc README.md CHANGELOG
 %attr(755,root,root) %{_gamesbindir}/quake2
 %{_gamesbindir}/quake2.bin
 %dir %{_libdir}/games/quake2
