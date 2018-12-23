@@ -76,8 +76,7 @@ Install the PAK files in %{_gamesdatadir}/quake2.
 Summary:	Quake II Capture the Flag for Linux
 Group:		Games/Arcade
 Requires:	%{name} = %{version} %{name}-server = %{version}
-Requires(preunt):	rpm-helper
-Requires(post):	rpm-helper
+Requires:	rpm-helper
 
 %description	ctf
 Quake II Capture The Flag (Q2CTF) is a multiplayer addon for Quake2 that 
