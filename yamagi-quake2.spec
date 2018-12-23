@@ -351,7 +351,7 @@ ln -sf %{_gamesdatadir}/quake2/xatrix/pak0.pak %{buildroot}%{_libdir}/games/quak
 
 %files
 %defattr(-,root,root,755)
-%doc README
+%doc README.md CHANGELOG
 %attr(755,root,root) %{_gamesbindir}/quake2
 %{_gamesbindir}/quake2.bin
 %dir %{_libdir}/games/quake2
