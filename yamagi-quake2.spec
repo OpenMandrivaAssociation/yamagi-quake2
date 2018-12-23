@@ -2,12 +2,12 @@
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define ctf_source	%{oname}-ctf
-%define rogue_version	2.02
-%define xatrix_version	2.03
-%define ctf_version	1.03
+%define rogue_version	2.04
+%define xatrix_version	2.05
+%define ctf_version	1.05
 
 Name:		yamagi-%{oname}
-Version:	5.32
+Version:	7.30
 Release:	1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
@@ -34,6 +34,8 @@ BuildRequires:	pkgconfig(glu)
 BuildRequires:	zlib-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	pkgconfig(openal)
+BuildRequires: pkgconfig(sdl2)
+BuildRequires: pkgconfig(x11)
 # Seems to be removed in new versions
 Obsoletes:	%{name}-glx < 5.23
 
