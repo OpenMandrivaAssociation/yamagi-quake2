@@ -212,6 +212,7 @@ This archive contains the Quake II dedicated server.
 %setup -q -T -D -a 3 -n %{oname}-%{version}
 
 %build
+%global ldflags %{ldflags} -fuse-ld=gold
 %ifarch %{ix86} x86_64
 export OPTFLAGS="-O2 -ffast-math -funroll-loops -falign-loops=2 -falign-jumps=2 -falign-functions=2 -fno-strict-aliasing"
 %else
