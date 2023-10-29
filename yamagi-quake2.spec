@@ -27,6 +27,7 @@ Source13:	%{oname}_48.png
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	aalib-devel
 BuildRequires:	svgalib-devel
+BuildRequires: pkgconfig(libcurl)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(gl)
