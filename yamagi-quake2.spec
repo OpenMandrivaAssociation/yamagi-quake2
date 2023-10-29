@@ -32,8 +32,8 @@ BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(xrender)
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glu)
-BuildRequires:	zlib-devel
-BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(openal)
 BuildRequires: pkgconfig(sdl2)
 BuildRequires: pkgconfig(x11)
@@ -214,11 +214,11 @@ This archive contains the Quake II dedicated server.
 
 %build
 #global ldflags %{ldflags} -fuse-ld=gold
-%ifarch %{ix86} x86_64
-export OPTFLAGS="-O2 -ffast-math -funroll-loops -falign-loops=2 -falign-jumps=2 -falign-functions=2 -fno-strict-aliasing"
-%else
-export OPTFLAGS="%{optflags} -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations"
-%endif
+#ifarch %{ix86} x86_64
+#export OPTFLAGS="-O2 -ffast-math -funroll-loops -falign-loops=2 -falign-jumps=2 -falign-functions=2 -fno-strict-aliasing"
+#else
+#export OPTFLAGS="%{optflags} -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations"
+#endif
 
 %make
 
