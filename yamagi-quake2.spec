@@ -2,12 +2,12 @@
 %define rogue_source	%{oname}-rogue
 %define xatrix_source	%{oname}-xatrix
 %define ctf_source	%{oname}-ctf
-%define rogue_version	2.06
-%define xatrix_version	2.07
-%define ctf_version	1.06
+%define rogue_version	2.10
+%define xatrix_version	2.11
+%define ctf_version	1.09
 
 Name:		yamagi-%{oname}
-Version:	7.42
+Version:	8.20
 Release:	1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
@@ -212,7 +212,7 @@ This archive contains the Quake II dedicated server.
 %setup -q -T -D -a 3 -n %{oname}-%{version}
 
 %build
-%global ldflags %{ldflags} -fuse-ld=gold
+#global ldflags %{ldflags} -fuse-ld=gold
 %ifarch %{ix86} x86_64
 export OPTFLAGS="-O2 -ffast-math -funroll-loops -falign-loops=2 -falign-jumps=2 -falign-functions=2 -fno-strict-aliasing"
 %else
