@@ -12,7 +12,7 @@ Release:	1
 Summary:	Yamagi Quake II is an enhanced client for id Software's Quake II
 Group:		Games/Arcade
 License:	GPL
-URL:		http://www.yamagi.org/quake2/
+URL:		https://www.yamagi.org/quake2/
 Source0:	%{oname}-%{version}.tar.xz
 Source1:	%{rogue_source}-%{rogue_version}.tar.xz
 Source2:	%{xatrix_source}-%{xatrix_version}.tar.xz
