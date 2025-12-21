@@ -24,6 +24,7 @@ Source9:	q2ctf.cfg
 Source11:	%{oname}_16.png
 Source12:	%{oname}_32.png
 Source13:	%{oname}_48.png
+BuildRequires:	make
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	aalib-devel
 BuildRequires:	svgalib-devel
